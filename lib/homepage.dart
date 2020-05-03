@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:tgd_covid_tracker/datasorce.dart';
 import 'package:tgd_covid_tracker/pages/countyPage.dart';
@@ -48,25 +46,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Theme.of(context).brightness == Brightness.light
-                  ? Icons.lightbulb_outline
-                  : Icons.highlight,
-            ),
-            onPressed: () {
-              DynamicTheme.of(context).setBrightness(
-                Theme.of(context).brightness == Brightness.light
-                    ? Brightness.dark
-                    : Brightness.light,
-              );
-            },
-          )
-        ],
-        centerTitle: false,
+        centerTitle: true,
         title: Text(
-          'COVID-19 TRACKER',
+          'Covid-19 Tracker',
         ),
       ),
       body: RefreshIndicator(

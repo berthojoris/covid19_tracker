@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tgd_covid_tracker/datasorce.dart';
 
 class Search extends SearchDelegate {
   final List countryList;
 
   Search(this.countryList);
-
-  @override
-  ThemeData appBarTheme(BuildContext context) {
-    return ThemeData(
-      primaryColor: primaryBlack,
-      textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white),
-    );
-  }
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -24,6 +15,30 @@ class Search extends SearchDelegate {
         },
       )
     ];
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return ThemeData(
+      primaryColor: Color(0xff202c3b),
+      primaryIconTheme: IconThemeData(color: Colors.white),
+      primaryColorBrightness: Brightness.light,
+      textTheme: TextTheme(
+        title: TextStyle(
+          color: Colors.white,
+          fontSize: 20.0,
+          decoration: TextDecoration.none,
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 20.0,
+          decoration: TextDecoration.none,
+        ),
+      ),
+      cursorColor: Colors.white,
+    );
   }
 
   @override

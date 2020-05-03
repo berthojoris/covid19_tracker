@@ -32,6 +32,7 @@ class _CountryPageState extends State<CountryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         actions: <Widget>[
           countryData == null
               ? Container()
