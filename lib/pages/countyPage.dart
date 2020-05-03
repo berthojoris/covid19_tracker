@@ -13,11 +13,13 @@ class _CountryPageState extends State<CountryPage> {
   List countryData;
 
   fetchCountryData() async {
-    http.Response response =
-        await http.get('https://corona.lmao.ninja/v2/countries');
-    setState(() {
-      countryData = json.decode(response.body);
-    });
+    if (this.mounted) {
+      http.Response response =
+          await http.get('https://corona.lmao.ninja/v2/countries');
+      setState(() {
+        countryData = json.decode(response.body);
+      });
+    }
   }
 
   @override
@@ -31,12 +33,12 @@ class _CountryPageState extends State<CountryPage> {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: Search(countryData));
-            },
-          )
+          countryData == null
+              ? Container()
+              : searchButton(
+                  context,
+                  countryData,
+                ),
         ],
         title: Text('Country Stats'),
       ),
@@ -48,7 +50,7 @@ class _CountryPageState extends State<CountryPage> {
               itemBuilder: (context, index) {
                 return Card(
                   child: Container(
-                    height: 130,
+                    height: 70,
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     child: Row(
                       children: <Widget>[
@@ -72,46 +74,49 @@ class _CountryPageState extends State<CountryPage> {
                           ),
                         ),
                         Expanded(
-                            child: Container(
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'CONFIRMED:' +
-                                    countryData[index]['cases'].toString(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red,
+                          child: Container(
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  'CONFIRMED:' +
+                                      countryData[index]['cases'].toString(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'ACTIVE:' +
-                                    countryData[index]['active'].toString(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
+                                Text(
+                                  'ACTIVE:' +
+                                      countryData[index]['active'].toString(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'RECOVERED:' +
-                                    countryData[index]['recovered'].toString(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green,
+                                Text(
+                                  'RECOVERED:' +
+                                      countryData[index]['recovered']
+                                          .toString(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'DEATHS:' +
-                                    countryData[index]['deaths'].toString(),
-                                style: TextStyle(
+                                Text(
+                                  'DEATHS:' +
+                                      countryData[index]['deaths'].toString(),
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Theme.of(context).brightness ==
                                             Brightness.dark
                                         ? Colors.grey[100]
-                                        : Colors.grey[900]),
-                              ),
-                            ],
+                                        : Colors.grey[900],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ))
+                        )
                       ],
                     ),
                   ),
@@ -121,4 +126,13 @@ class _CountryPageState extends State<CountryPage> {
             ),
     );
   }
+}
+
+Widget searchButton(BuildContext context, countryData) {
+  return IconButton(
+    icon: Icon(Icons.search),
+    onPressed: () {
+      showSearch(context: context, delegate: Search(countryData));
+    },
+  );
 }

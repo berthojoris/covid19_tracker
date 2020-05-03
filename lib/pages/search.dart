@@ -1,4 +1,3 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:tgd_covid_tracker/datasorce.dart';
 
@@ -11,7 +10,7 @@ class Search extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
       primaryColor: primaryBlack,
-      brightness: DynamicTheme.of(context).brightness,
+      textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white),
     );
   }
 
@@ -56,7 +55,7 @@ class Search extends SearchDelegate {
       itemBuilder: (context, index) {
         return Card(
           child: Container(
-            height: 130,
+            height: 70,
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Row(
               children: <Widget>[

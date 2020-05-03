@@ -131,7 +131,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               worldData == null
-                  ? CircularProgressIndicator()
+                  ? Padding(
+                      padding: EdgeInsets.only(top: 10.0, bottom: 30.0),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ))
                   : WorldwidePanel(
                       worldData: worldData,
                     ),
