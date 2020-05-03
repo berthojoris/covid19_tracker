@@ -12,7 +12,11 @@ class InfoPanel extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => FAQPage()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FAQPage(),
+                ),
+              );
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
@@ -24,9 +28,10 @@ class InfoPanel extends StatelessWidget {
                   Text(
                     'FAQS',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                   Icon(
                     Icons.arrow_forward,
@@ -50,9 +55,10 @@ class InfoPanel extends StatelessWidget {
                   Text(
                     'DONATE',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                   Icon(
                     Icons.arrow_forward,
@@ -77,9 +83,10 @@ class InfoPanel extends StatelessWidget {
                   Text(
                     'MYTH BUSTERS',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                   Icon(
                     Icons.arrow_forward,

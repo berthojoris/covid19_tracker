@@ -20,20 +20,18 @@ class MostAffectedPanel extends StatelessWidget {
                   countryData[index]['countryInfo']['flag'],
                   height: 25,
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                SizedBox(width: 10),
                 Text(
                   countryData[index]['country'],
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                SizedBox(width: 10),
                 Text(
                   'Deaths:' + countryData[index]['deaths'].toString(),
-                  style:
-                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
                 )
               ],
             ),

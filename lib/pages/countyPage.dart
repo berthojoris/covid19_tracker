@@ -13,7 +13,6 @@ class _CountryPageState extends State<CountryPage> {
   List countryData;
 
   fetchCountryData() async {
-    
     http.Response response =
         await http.get('https://corona.lmao.ninja/v2/countries');
     setState(() {
@@ -32,11 +31,12 @@ class _CountryPageState extends State<CountryPage> {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.search),onPressed: (){
-
-            showSearch(context: context, delegate: Search(countryData));
-
-          },)
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: Search(countryData));
+            },
+          )
         ],
         title: Text('Country Stats'),
       ),
@@ -79,29 +79,35 @@ class _CountryPageState extends State<CountryPage> {
                                 'CONFIRMED:' +
                                     countryData[index]['cases'].toString(),
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red,
+                                ),
                               ),
                               Text(
                                 'ACTIVE:' +
                                     countryData[index]['active'].toString(),
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                ),
                               ),
                               Text(
                                 'RECOVERED:' +
                                     countryData[index]['recovered'].toString(),
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green,
+                                ),
                               ),
                               Text(
                                 'DEATHS:' +
                                     countryData[index]['deaths'].toString(),
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).brightness==Brightness.dark?Colors.grey[100]:Colors.grey[900]),
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.grey[100]
+                                        : Colors.grey[900]),
                               ),
                             ],
                           ),

@@ -13,14 +13,15 @@ class MyApp extends StatelessWidget {
     return DynamicTheme(
       data: (brightness) {
         return ThemeData(
-            primaryColor: primaryBlack,
-            fontFamily: 'Circular',
-            brightness: brightness == Brightness.light
-                ? Brightness.light
-                : Brightness.dark,
-            scaffoldBackgroundColor: brightness == Brightness.dark
-                ? Colors.blueGrey[900]
-                : Colors.white);
+          primaryColor: primaryBlack,
+          fontFamily: 'Circular',
+          brightness: brightness == Brightness.light
+              ? Brightness.light
+              : Brightness.dark,
+          scaffoldBackgroundColor: brightness == Brightness.dark
+              ? Colors.blueGrey[900]
+              : Colors.white,
+        );
       },
       themedWidgetBuilder: (context, theme) {
         return MaterialApp(
