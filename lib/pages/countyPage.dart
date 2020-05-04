@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'dart:convert';
 
 import 'package:tgd_covid_tracker/pages/search.dart';
+import 'package:tgd_covid_tracker/shimmer_country.dart';
 
 class CountryPage extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class _CountryPageState extends State<CountryPage> {
       ),
       body: countryData == null
           ? Center(
-              child: CircularProgressIndicator(),
+              child: ShimmerCountry(),
             )
           : ListView.builder(
               itemBuilder: (context, index) {

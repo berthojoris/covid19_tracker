@@ -46,21 +46,18 @@ class ShimmerLoading extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: primaryBlack,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'Regional',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: primaryBlack,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Regional',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -107,14 +104,17 @@ class ShimmerLoading extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
                   'Most affected Countries',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Container(
                 width: MediaQuery.of(context).size.width / 2,
-                height: MediaQuery.of(context).size.height,
                 child: ListView.builder(
                   itemCount: 5,
+                  shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding:
