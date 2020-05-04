@@ -14,7 +14,9 @@ class WorldwidePanel extends StatelessWidget {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, childAspectRatio: 2),
+          crossAxisCount: 2,
+          childAspectRatio: 2,
+        ),
         children: <Widget>[
           StatusPanel(
             title: 'CONFIRMED',

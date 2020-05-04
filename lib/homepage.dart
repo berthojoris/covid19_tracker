@@ -6,6 +6,7 @@ import 'package:tgd_covid_tracker/panels/infoPanel.dart';
 import 'package:tgd_covid_tracker/panels/mosteffectedcountries.dart';
 import 'package:tgd_covid_tracker/panels/worldwidepanel.dart';
 import 'package:http/http.dart' as http;
+import 'package:tgd_covid_tracker/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isLoading = true;
   Map worldData;
   fetchWorldWideData() async {
     http.Response response = await http.get('https://corona.lmao.ninja/v2/all');
@@ -31,9 +33,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future fetchData() async {
-    fetchWorldWideData();
-    fetchCountryData();
-    print('fetchData called');
+    await fetchWorldWideData();
+    await fetchCountryData();
+    setState(() {
+      isLoading = false;
+    });
+    print('CALL API DONE');
   }
 
   @override
@@ -51,102 +56,107 @@ class _HomePageState extends State<HomePage> {
           'Covid-19 Tracker',
         ),
       ),
-      body: RefreshIndicator(
-        onRefresh: fetchData,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                height: 100,
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(10),
-                color: Colors.orange[100],
-                child: Text(
-                  DataSource.quote,
-                  style: TextStyle(
-                    color: Colors.orange[800],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: (isLoading)
+          ? ShimmerLoading()
+          : RefreshIndicator(
+              onRefresh: fetchData,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      'Worldwide',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CountryPage(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: primaryBlack,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'Regional',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    Container(
+                      height: 100,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(10),
+                      color: Colors.orange[100],
+                      child: Text(
+                        DataSource.quote,
+                        style: TextStyle(
+                          color: Colors.orange[800],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 10,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Worldwide',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CountryPage(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: primaryBlack,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                'Regional',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    worldData == null
+                        ? Padding(
+                            padding: EdgeInsets.only(top: 10.0, bottom: 30.0),
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        : WorldwidePanel(
+                            worldData: worldData,
+                          ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(
+                        'Most affected Countries',
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    countryData == null
+                        ? Container()
+                        : MostAffectedPanel(countryData: countryData),
+                    InfoPanel(),
+                    SizedBox(height: 20),
+                    Center(
+                      child: Text(
+                        'WE ARE TOGETHER IN THE FIGHT',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                    ),
+                    SizedBox(height: 50)
                   ],
                 ),
               ),
-              worldData == null
-                  ? Padding(
-                      padding: EdgeInsets.only(top: 10.0, bottom: 30.0),
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : WorldwidePanel(
-                      worldData: worldData,
-                    ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(
-                  'Most affected Countries',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(height: 10),
-              countryData == null
-                  ? Container()
-                  : MostAffectedPanel(
-                      countryData: countryData,
-                    ),
-              InfoPanel(),
-              SizedBox(height: 20),
-              Center(
-                  child: Text(
-                'WE ARE TOGETHER IN THE FIGHT',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              )),
-              SizedBox(height: 50)
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
