@@ -117,7 +117,8 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.only(top: 10.0, bottom: 30.0),
                       child: Center(
                         child: CircularProgressIndicator(),
-                      ))
+                      ),
+                    )
                   : WorldwidePanel(
                       worldData: worldData,
                     ),

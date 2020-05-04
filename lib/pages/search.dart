@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Search extends SearchDelegate {
   final List countryList;
@@ -22,7 +23,7 @@ class Search extends SearchDelegate {
     return ThemeData(
       primaryColor: Color(0xff202c3b),
       primaryIconTheme: IconThemeData(color: Colors.white),
-      primaryColorBrightness: Brightness.light,
+      primaryColorBrightness: Brightness.dark,
       textTheme: TextTheme(
         title: TextStyle(
           color: Colors.white,
@@ -58,11 +59,12 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    final nf = NumberFormat("#,###");
     final suggestionList = query.isEmpty
         ? countryList
         : countryList
             .where((element) =>
-                element['country'].toString().toLowerCase().startsWith(query))
+                element['country'].toLowerCase().contains(query.toLowerCase()))
             .toList();
 
     return ListView.builder(
@@ -99,14 +101,19 @@ class Search extends SearchDelegate {
                     children: <Widget>[
                       Text(
                         'CONFIRMED:' +
-                            suggestionList[index]['cases'].toString(),
+                            nf
+                                .format(suggestionList[index]['cases'])
+                                .toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.red,
                         ),
                       ),
                       Text(
-                        'ACTIVE:' + suggestionList[index]['active'].toString(),
+                        'ACTIVE:' +
+                            nf
+                                .format(suggestionList[index]['active'])
+                                .toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
@@ -114,14 +121,19 @@ class Search extends SearchDelegate {
                       ),
                       Text(
                         'RECOVERED:' +
-                            suggestionList[index]['recovered'].toString(),
+                            nf
+                                .format(suggestionList[index]['recovered'])
+                                .toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.green,
                         ),
                       ),
                       Text(
-                        'DEATHS:' + suggestionList[index]['deaths'].toString(),
+                        'DEATHS:' +
+                            nf
+                                .format(suggestionList[index]['deaths'])
+                                .toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).brightness == Brightness.dark

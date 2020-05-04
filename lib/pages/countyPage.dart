@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'dart:convert';
 
 import 'package:tgd_covid_tracker/pages/search.dart';
@@ -11,6 +12,7 @@ class CountryPage extends StatefulWidget {
 
 class _CountryPageState extends State<CountryPage> {
   List countryData;
+  final nf = NumberFormat("#,###");
 
   fetchCountryData() async {
     if (this.mounted) {
@@ -79,24 +81,30 @@ class _CountryPageState extends State<CountryPage> {
                             child: Column(
                               children: <Widget>[
                                 Text(
-                                  'CONFIRMED:' +
-                                      countryData[index]['cases'].toString(),
+                                  'CONFIRMED: ' +
+                                      nf
+                                          .format(countryData[index]['cases'])
+                                          .toString(),
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.red,
                                   ),
                                 ),
                                 Text(
-                                  'ACTIVE:' +
-                                      countryData[index]['active'].toString(),
+                                  'ACTIVE: ' +
+                                      nf
+                                          .format(countryData[index]['active'])
+                                          .toString(),
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.blue,
                                   ),
                                 ),
                                 Text(
-                                  'RECOVERED:' +
-                                      countryData[index]['recovered']
+                                  'RECOVERED: ' +
+                                      nf
+                                          .format(
+                                              countryData[index]['recovered'])
                                           .toString(),
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -104,8 +112,10 @@ class _CountryPageState extends State<CountryPage> {
                                   ),
                                 ),
                                 Text(
-                                  'DEATHS:' +
-                                      countryData[index]['deaths'].toString(),
+                                  'DEATHS: ' +
+                                      nf
+                                          .format(countryData[index]['deaths'])
+                                          .toString(),
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Theme.of(context).brightness ==

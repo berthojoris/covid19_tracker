@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MostAffectedPanel extends StatelessWidget {
   final List countryData;
@@ -7,6 +8,7 @@ class MostAffectedPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final nf = NumberFormat("#,###");
     return Container(
       child: ListView.builder(
         shrinkWrap: true,
@@ -27,7 +29,8 @@ class MostAffectedPanel extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  'Deaths:' + countryData[index]['deaths'].toString(),
+                  'Deaths: ' +
+                      nf.format(countryData[index]['deaths']).toString(),
                   style: TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.bold,

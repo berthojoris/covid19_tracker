@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class WorldwidePanel extends StatelessWidget {
   final Map worldData;
@@ -7,6 +8,7 @@ class WorldwidePanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final nf = NumberFormat("#,###");
     return Container(
       child: GridView(
         shrinkWrap: true,
@@ -18,25 +20,25 @@ class WorldwidePanel extends StatelessWidget {
             title: 'CONFIRMED',
             panelColor: Colors.red[100],
             textColor: Colors.red,
-            count: worldData['cases'].toString(),
+            count: nf.format(worldData['cases']).toString(),
           ),
           StatusPanel(
             title: 'ACTIVE',
             panelColor: Colors.blue[100],
             textColor: Colors.blue[900],
-            count: worldData['active'].toString(),
+            count: nf.format(worldData['active']).toString(),
           ),
           StatusPanel(
             title: 'RECOVERED',
             panelColor: Colors.green[100],
             textColor: Colors.green,
-            count: worldData['recovered'].toString(),
+            count: nf.format(worldData['recovered']).toString(),
           ),
           StatusPanel(
             title: 'DEATHS',
             panelColor: Colors.grey[400],
             textColor: Colors.grey[900],
-            count: worldData['deaths'].toString(),
+            count: nf.format(worldData['deaths']).toString(),
           ),
         ],
       ),
