@@ -29,6 +29,7 @@ dependencies:
   dynamic_theme:
   pie_chart:
   intl: ^0.16.1
+  shimmer: ^1.1.1
 
 dev_dependencies:
   flutter_test:
