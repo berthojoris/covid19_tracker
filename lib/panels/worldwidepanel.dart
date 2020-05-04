@@ -20,8 +20,8 @@ class WorldwidePanel extends StatelessWidget {
         children: <Widget>[
           StatusPanel(
             title: 'CONFIRMED',
-            panelColor: Colors.red[100],
-            textColor: Colors.red,
+            panelColor: Colors.orange[100],
+            textColor: Colors.orange,
             count: nf.format(worldData['cases']).toString(),
           ),
           StatusPanel(
@@ -38,8 +38,8 @@ class WorldwidePanel extends StatelessWidget {
           ),
           StatusPanel(
             title: 'DEATHS',
-            panelColor: Colors.grey[400],
-            textColor: Colors.grey[900],
+            panelColor: Colors.red[100],
+            textColor: Colors.red[900],
             count: nf.format(worldData['deaths']).toString(),
           ),
         ],

@@ -54,7 +54,7 @@ class _CountryPageState extends State<CountryPage> {
               itemBuilder: (context, index) {
                 return Card(
                   child: Container(
-                    height: 70,
+                    height: 90,
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     child: Row(
                       children: <Widget>[
@@ -65,9 +65,12 @@ class _CountryPageState extends State<CountryPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text(
-                                countryData[index]['country'],
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                              Flexible(
+                                child: Text(
+                                  countryData[index]['country'],
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
                               ),
                               Image.network(
                                 countryData[index]['countryInfo']['flag'],
@@ -88,7 +91,7 @@ class _CountryPageState extends State<CountryPage> {
                                           .toString(),
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.red,
+                                    color: Colors.orange,
                                   ),
                                 ),
                                 Text(
@@ -119,10 +122,7 @@ class _CountryPageState extends State<CountryPage> {
                                           .toString(),
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? Colors.grey[100]
-                                        : Colors.grey[900],
+                                    color: Colors.red,
                                   ),
                                 ),
                               ],

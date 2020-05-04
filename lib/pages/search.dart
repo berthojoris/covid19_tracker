@@ -72,7 +72,7 @@ class Search extends SearchDelegate {
       itemBuilder: (context, index) {
         return Card(
           child: Container(
-            height: 70,
+            height: 90,
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Row(
               children: <Widget>[
@@ -100,17 +100,17 @@ class Search extends SearchDelegate {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        'CONFIRMED:' +
+                        'CONFIRMED: ' +
                             nf
                                 .format(suggestionList[index]['cases'])
                                 .toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.red,
+                          color: Colors.orange,
                         ),
                       ),
                       Text(
-                        'ACTIVE:' +
+                        'ACTIVE: ' +
                             nf
                                 .format(suggestionList[index]['active'])
                                 .toString(),
@@ -120,7 +120,7 @@ class Search extends SearchDelegate {
                         ),
                       ),
                       Text(
-                        'RECOVERED:' +
+                        'RECOVERED: ' +
                             nf
                                 .format(suggestionList[index]['recovered'])
                                 .toString(),
@@ -130,15 +130,13 @@ class Search extends SearchDelegate {
                         ),
                       ),
                       Text(
-                        'DEATHS:' +
+                        'DEATHS: ' +
                             nf
                                 .format(suggestionList[index]['deaths'])
                                 .toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey[100]
-                              : Colors.grey[900],
+                          color: Colors.red,
                         ),
                       ),
                     ],
