@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -72,10 +73,13 @@ class _CountryPageState extends State<CountryPage> {
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              Image.network(
-                                countryData[index]['countryInfo']['flag'],
+                              CachedNetworkImage(
                                 height: 50,
                                 width: 60,
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                imageUrl: countryData[index]['countryInfo']
+                                    ['flag'],
                               ),
                             ],
                           ),

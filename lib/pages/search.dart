@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -87,10 +88,12 @@ class Search extends SearchDelegate {
                         suggestionList[index]['country'],
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Image.network(
-                        suggestionList[index]['countryInfo']['flag'],
+                      CachedNetworkImage(
                         height: 50,
                         width: 60,
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        imageUrl: suggestionList[index]['countryInfo']['flag'],
                       ),
                     ],
                   ),
